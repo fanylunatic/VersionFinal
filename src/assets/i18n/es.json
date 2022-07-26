@@ -1,0 +1,23 @@
+{
+  "MENUITEMS": {
+    "MAIN": {
+      "TEXT": "Principal"
+    },
+    "DASHBOARD": {
+      "TEXT": "Tablero de mandos",
+      "LIST": {
+        "DASHBOARD1": "Tablero de mandos 1",
+        "DASHBOARD2": "Tablero de mandos 2",
+        "GRUPO": "Administracion de Grupos"
+      }
+    },
+
+    "PROFESOR": {    
+        "DASHBOARD": "Tablero"
+    },
+    "ALUMNO": {    
+      "TEXT": "Alumno",
+      "DASHBOARD": "Tablero"
+    }
+  }
+}

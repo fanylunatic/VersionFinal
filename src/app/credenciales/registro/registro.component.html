@@ -1,0 +1,95 @@
+<section class="content">
+  <div class="content-block">
+    <br>
+    <!-- Barra de carga -->
+    <mat-progress-bar mode="indeterminate" *ngIf="statusBarra"></mat-progress-bar>
+    <br>
+    <!-- Formulario de busquedaDinamica -->
+    <div class="card" style="height: 90px;">
+      <div class="card-body">
+        <form class="form-group row" [formGroup]="busquedaDinamica" (submit)="buscarRegistro()">
+        
+            <!-- Input correo -->
+            <div class="col-4"> <mat-form-field appearance="fill" style="width: 380px;">
+              <mat-label>Correo</mat-label>
+              <input matInput placeholder="" formControlName="correo" name="correo" maxlength="30">
+              </mat-form-field>
+            </div>
+            <!-- Select rol -->
+            <div class="col-2">
+              <mat-form-field style="width:140px;" appearance="fill">
+                <mat-label>Rol</mat-label>
+                <mat-select formControlName="rol" name="rol">
+                  <mat-option [value]="1">Administrador</mat-option>
+                  <mat-option [value]="2">Profesor</mat-option>
+                  <mat-option [value]="3">Alumno</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!-- Bóton añadir nuevo usuario -->
+                <div class="col-1"><button type="button" mat-mini-fab color="primary" (click)="nuevoRegistro()"><mat-icon>add</mat-icon></button> </div>
+            <!-- Botón buscar -->
+                <div class="col-1"><button type="submit" class="btn btn-primary"> <mat-icon class="col-white">search</mat-icon></button></div>
+            <!-- Bóton mostrar todos los datos y despliega la tabla -->    
+                <div class="col-2"> <button type="button" class="btn btn-outline-primary"(click)="consultarTodos()">Mostrar Todos</button></div>
+            <!-- Bóton limpia la busqueda de la tabla  -->
+                <div class="col-auto"> <button type="button" class="btn btn-outline-warning" (click)="resetTabla()" >Limpiar</button></div>
+            <div class="col" style="padding-bottom: 30px;" >
+              
+            </div>
+
+        </form>
+      </div>
+
+    </div>
+    <!-- Tabla que muestra los registros de usuarios existentes -->
+    <div class="card">
+      <div class="card-body">
+
+        <div class="mat-elevation-z8">
+          <mat-table #table [dataSource]="dato" matSort >
+
+
+            <ng-container matColumnDef="correo">
+              <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+              <mat-cell *matCellDef="let dato"> {{dato.correo}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="password">
+              <mat-header-cell *matHeaderCellDef> Contraseña </mat-header-cell>
+              <mat-cell *matCellDef="let dato"> {{dato.password}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="rol">
+              <mat-header-cell *matHeaderCellDef> Rol </mat-header-cell>
+              <mat-cell *matCellDef="let dato"> {{dato.rol.rol}} </mat-cell>
+            </ng-container>
+
+            <!-- Botones de modificar y eliminar registro -->
+            <ng-container matColumnDef="editar-eliminar">
+              <mat-header-cell *matHeaderCellDef id="Accion" > Acciones </mat-header-cell>
+              <mat-cell *matCellDef="let row" >
+                <button type="button" class="btn btn-outline-success"(click)="nuevoRegistro(row,row.rol.id)">
+                  <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                </button>
+                <button type="button" class="btn btn-outline-danger" (click)="eliminarRegistro(row.id)">
+                  <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                </button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+          </mat-table>
+          <!-- Paginador de la tabla -->
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
