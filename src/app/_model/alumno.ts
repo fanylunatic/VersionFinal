@@ -1,4 +1,4 @@
-import { Ciclo } from "./ciclo";
+import { Grupo } from "./grupo";
 
 export class Alumno{
 
@@ -10,6 +10,6 @@ export class Alumno{
     correo:string;
     estatus:string;
     foto: null;
-    ciclo:Ciclo;
+    grupo:Grupo;
 
 }
